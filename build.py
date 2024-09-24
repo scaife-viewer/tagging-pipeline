@@ -51,7 +51,7 @@ for repo, urn_prefix in repos:
     print(f"Processing {repo}")
     directory = Path(repo) / "data"
     for group, work, stem, file in get_files(directory):
-        urn = f"{urn_prefix}:{group}.{work}.{stem}"
+        urn = f"{urn_prefix}:{stem}"
         try:
             text = CapitainsCtsText(urn=urn, resource=open(file))
         except MissingRefsDecl:

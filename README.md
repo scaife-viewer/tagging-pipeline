@@ -1,9 +1,11 @@
 # tagging-pipeline
 
 - extracts passages from CapiTainS-compliant repos
-- (soon) tags them using spaCy
-- (later) allows overriding with human-curated tagging
+- tags them using spaCy (just Latin for now)
+- (soon) allows overriding with human-curated tagging
 
-In a venv with `requirements.txt` installed, run `build.py repos.tsv`.
+With dependencies installed in a venv, run `build.py repos.tsv`.
 
-This script is re-entrant and detects changes by hashing the text and comparing to a hash stored in the output directory.
+Then, run `tag.py`.
+
+These scripts are re-entrant and detect changes by hashing their input and comparing to a hash stored in the output directory.
