@@ -6,7 +6,7 @@ import sys
 from hashlib import md5
 from pathlib import Path
 
-from lxml.etree import XPathEvalError
+from lxml.etree import XPathEvalError, XMLSyntaxError
 from MyCapytain.errors import MissingRefsDecl
 from MyCapytain.resources.texts.local.capitains.cts import CapitainsCtsText
 
@@ -55,7 +55,9 @@ for repo, urn_prefix in repos:
         try:
             text = CapitainsCtsText(urn=urn, resource=open(file))
         except MissingRefsDecl:
-            continue
+            continue  # @@@ log
+        except XMLSyntaxError:
+            continue  # @@@ log
 
         hash = md5(text.text.encode("utf-8")).hexdigest()
 
