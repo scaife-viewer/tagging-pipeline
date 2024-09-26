@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 mycapytain = "==3.0.2"
 la-core-web-trf = {file = "https://huggingface.co/latincy/la_core_web_trf/resolve/main/la_core_web_trf-any-py3-none-any.whl"}
+lxml = "*"
 
 [dev-packages]
 
