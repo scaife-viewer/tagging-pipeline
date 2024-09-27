@@ -6,8 +6,12 @@ from pathlib import Path
 import spacy
 
 
+spacy.prefer_gpu()
+
+
 nlp = {
     "lat": spacy.load("la_core_web_trf"),
+    "grc": spacy.load("grc_proiel_trf"),
 } 
 
 DATA_DIR = Path("data")
@@ -19,6 +23,8 @@ def get_files(directory):
                 if file.suffix == ".tsv" and ".tagged" not in file.stem:
                     if "lat" in file.stem:
                         yield "lat", file
+                    elif "grc" in file.stem:
+                        yield "grc", file
 
 unchanged = 0
 changed = 0
@@ -32,14 +38,22 @@ for lang, file in get_files(DATA_DIR):
         print(f"{file} unchanged")
         unchanged += 1
     else:
+        runtime_error = False
         print(f"{file} changed", end="...")
         with open(file.with_suffix(".tagged.tsv"), "w") as outfile:
             for line in open(file):
                 print(".", end="", flush=True)
                 ref, text = line.rstrip("\n").split("\t")
-                doc = nlp[lang](text)
+                try:
+                    doc = nlp[lang](text)
+                except RuntimeError as e:
+                    print(f"Error in {file}: {ref} : {e}")
+                    runtime_error = True
+                    break
                 for token in doc:
                     print(ref, token.i, token.text, token.pos_, token.tag_, token.morph, token.lemma_, token.dep_, token.head.i, sep="\t", file=outfile)
+            if runtime_error:
+                continue
         print("tagged.")
         work_dir.joinpath(f"{file.stem}.tagged.md5").write_text(hash)
         changed += 1

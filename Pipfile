@@ -4,9 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+lxml = "*"
 mycapytain = "==3.0.2"
 la-core-web-trf = {file = "https://huggingface.co/latincy/la_core_web_trf/resolve/main/la_core_web_trf-any-py3-none-any.whl"}
-lxml = "*"
+grc-proiel-trf = {file = "https://huggingface.co/Jacobo/grc_proiel_trf/resolve/main/grc_proiel_trf-any-py3-none-any.whl"}
 
 [dev-packages]
 

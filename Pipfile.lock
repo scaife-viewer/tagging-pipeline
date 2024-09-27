@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "05042be9f3ae266abbc20393d1bbcf67a987f164ae97b0b6ecf248526d2c56e0"
+            "sha256": "a9c051b4969a9026b4c691fda76b3c50a1143e1b32dc8c02aaccde16dc38a4d1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -308,6 +308,9 @@
             "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==1.0.0"
         },
+        "grc-proiel-trf": {
+            "file": "https://huggingface.co/Jacobo/grc_proiel_trf/resolve/main/grc_proiel_trf-any-py3-none-any.whl"
+        },
         "huggingface-hub": {
             "hashes": [
                 "sha256:9ff7cb327343211fbd06e2b149b8f362fd1e389454f3f14c6db75a4999ee20ff",
@@ -344,11 +347,11 @@
         },
         "langcodes": {
             "hashes": [
-                "sha256:10a4cc078b8e8937d8485d3352312a0a89a3125190db9f2bb2074250eef654e9",
-                "sha256:ae5a77d1a01d0d1e91854a671890892b7ce9abb601ab7327fc5c874f899e1979"
+                "sha256:68f686fc3d358f222674ecf697ddcee3ace3c2fe325083ecad2543fd28a20e77",
+                "sha256:a24879fed238013ac3af2424b9d1124e38b4a38b2044fd297c8ff38e5912e718"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==3.4.0"
+            "version": "==3.4.1"
         },
         "language-data": {
             "hashes": [
