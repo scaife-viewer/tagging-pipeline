@@ -9,9 +9,9 @@ import spacy
 spacy.prefer_gpu()
 
 
-nlp = {
-    "lat": spacy.load("la_core_web_trf"),
-    "grc": spacy.load("grc_proiel_trf"),
+NLP = {
+    "lat": spacy.load("la_core_web_trf", disable=["ner"]),
+    "grc": spacy.load("grc_proiel_trf", disable=["ner"]),
 } 
 
 DATA_DIR = Path("data")
@@ -45,7 +45,9 @@ for lang, file in get_files(DATA_DIR):
                 print(".", end="", flush=True)
                 ref, text = line.rstrip("\n").split("\t")
                 try:
-                    doc = nlp[lang](text)
+                    nlp = NLP[lang]
+                    nlp.max_length = 2_000_000
+                    doc = nlp(text)
                 except RuntimeError as e:
                     print(f"Error in {file}: {ref} : {e}")
                     runtime_error = True
