@@ -18,18 +18,21 @@ DATA_DIR = Path("data")
 
 def get_files(directory):
     for group in directory.iterdir():
-        for work in group.iterdir():
-            for file in work.iterdir():
-                if file.suffix == ".tsv" and ".tagged" not in file.stem:
-                    if "lat" in file.stem:
-                        yield "lat", file
-                    elif "grc" in file.stem:
-                        yield "grc", file
+        if group.is_dir() and group.name != ".git":
+            for work in group.iterdir():
+                for file in work.iterdir():
+                    if file.suffix == ".tsv" and ".tagged" not in file.stem:
+                        if "lat" in file.stem:
+                            yield "lat", file
+                        elif "grc" in file.stem:
+                            yield "grc", file
 
 unchanged = 0
 changed = 0
 
 for shard in DATA_DIR.iterdir():
+    if not shard.is_dir():
+        continue
     for lang, file in get_files(shard):
         indata = open(file).read()
         hash = md5(indata.encode("utf-8")).hexdigest()
