@@ -4,7 +4,9 @@
 - tags them using spaCy
 - (soon) allows overriding with human-curated tagging
 
-With dependencies installed in a venv, run `build.py repos.tsv`.
+Each of the shards under `data/` needs to be cloned.
+
+Then, with dependencies installed in a venv, run `build.py repos.tsv`.
 
 Then, run `tag.py`.
 

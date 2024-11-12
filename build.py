@@ -10,6 +10,9 @@ from lxml.etree import XPathEvalError, XMLSyntaxError
 from MyCapytain.errors import MissingRefsDecl
 from MyCapytain.resources.texts.local.capitains.cts import CapitainsCtsText
 
+from sharding import get_shard_id
+
+
 if len(sys.argv) != 2:
     print("Usage: build.py <repo_file>")
     sys.exit(1)
@@ -61,7 +64,9 @@ for repo, urn_prefix in repos:
 
         hash = md5(text.text.encode("utf-8")).hexdigest()
 
-        work_dir = DATA_DIR / group / work
+        SHARD = f"tagging-shard-{get_shard_id(urn_prefix, group):02d}"
+
+        work_dir = DATA_DIR / SHARD / group / work
         work_dir.mkdir(exist_ok=True, parents=True)
 
         if work_dir.joinpath(f"{stem}.md5").exists() and open(work_dir.joinpath(f"{stem}.md5")).read() == hash:
